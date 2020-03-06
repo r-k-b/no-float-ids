@@ -7,7 +7,7 @@ from being assigned `Float` types.
 
 # Usage
 
-After adding [`elm-review`](elm-review) to your project, import this rule from
+After adding [`elm-review`][elm-review] to your project, import this rule from
 your `ReviewConfig.elm` file and add it to the config. E.g.:
 
     import NoFloatIds
@@ -17,7 +17,7 @@ your `ReviewConfig.elm` file and add it to the config. E.g.:
     config =
         [ NoFloatIds.rule ]
 
-[elm-review](https://package.elm-lang.org/packages/jfmengels/elm-review/latest/)
+[elm-review]: https://package.elm-lang.org/packages/jfmengels/elm-review/latest/
 
 @docs rule
 
