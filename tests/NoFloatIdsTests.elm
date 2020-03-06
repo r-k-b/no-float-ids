@@ -72,6 +72,22 @@ type alias R =
                                     , end = { row = 3, column = 21 }
                                     }
                             ]
+            , test "should catch aliases of Float" <|
+                \() ->
+                    testRule """module A exposing (..)
+
+type alias NotAFloat = Float
+
+type alias R =
+    { someId : NotAFloat }"""
+                        |> Review.Test.expectErrors
+                            [ Review.Test.error
+                                (standardErrorUnder "someId : NotAFloat")
+                                |> Review.Test.atExactly
+                                    { start = { row = 3, column = 7 }
+                                    , end = { row = 3, column = 21 }
+                                    }
+                            ]
             ]
         , describe "in Generic records"
             [ test "should not warn about Int ids" <|
