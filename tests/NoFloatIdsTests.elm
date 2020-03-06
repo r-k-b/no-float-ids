@@ -67,10 +67,6 @@ type alias R =
                         |> Review.Test.expectErrors
                             [ Review.Test.error
                                 (standardErrorUnder "someId : Float")
-                                |> Review.Test.atExactly
-                                    { start = { row = 3, column = 7 }
-                                    , end = { row = 3, column = 21 }
-                                    }
                             ]
             ]
         , describe "in Generic records"
@@ -111,10 +107,6 @@ type alias Foo a =
                         |> Review.Test.expectErrors
                             [ Review.Test.error
                                 (standardErrorUnder "fooId : Float")
-                                |> Review.Test.atExactly
-                                    { start = { row = 4, column = 11 }
-                                    , end = { row = 4, column = 24 }
-                                    }
                             ]
             ]
         ]
