@@ -1,5 +1,7 @@
 # NoFloatIds
 
+![.github/workflows/build.yml](https://github.com/r-k-b/no-float-ids/workflows/.github/workflows/build.yml/badge.svg)
+
 A rule for elm-review that discourages the use of Float types for "Id"
 properties.
 
