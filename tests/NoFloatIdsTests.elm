@@ -10,6 +10,23 @@ testRule =
     Review.Test.run NoFloatIds.rule
 
 
+standardErrorUnder : String -> { message : String, details : List String, under : String }
+standardErrorUnder under =
+    { message =
+        "Do not accept Float values for IDs from any API."
+    , details =
+        [ "It looks like this property will be treated as an Id, and has a type"
+            ++ "of Float. Floating point numbers are not guaranteed to exactly"
+            ++ " represent all integers, which is not great when the choice of"
+            ++ " how to transform a Float to an Int is an open question."
+            ++ " (Should it be truncated? Rounded? Something else?)"
+        , "Push back on the maintainers of the API, and ask them to modify it"
+            ++ " to use integers instead."
+        ]
+    , under = under
+    }
+
+
 tests : Test
 tests =
     describe "NoFloatIds"
@@ -30,10 +47,7 @@ type alias R = {someFoo:Float}"""
 type alias R = {someId:Float}"""
                         |> Review.Test.expectErrors
                             [ Review.Test.error
-                                { message = "Do not accept Float values for IDs from any API."
-                                , details = [ "Use Int or String instead." ]
-                                , under = "someId:Float"
-                                }
+                                (standardErrorUnder "someId:Float")
                             ]
             , test "should warn about id Floats" <|
                 \() ->
@@ -41,10 +55,7 @@ type alias R = {someId:Float}"""
 type alias R = {id:Float}"""
                         |> Review.Test.expectErrors
                             [ Review.Test.error
-                                { message = "Do not accept Float values for IDs from any API."
-                                , details = [ "Use Int or String instead." ]
-                                , under = "id:Float"
-                                }
+                                (standardErrorUnder "id:Float")
                             ]
             , test "should highlight just the offending property" <|
                 \() ->
@@ -55,10 +66,7 @@ type alias R =
     }"""
                         |> Review.Test.expectErrors
                             [ Review.Test.error
-                                { message = "Do not accept Float values for IDs from any API."
-                                , details = [ "Use Int or String instead." ]
-                                , under = "someId : Float"
-                                }
+                                (standardErrorUnder "someId : Float")
                                 |> Review.Test.atExactly
                                     { start = { row = 3, column = 7 }
                                     , end = { row = 3, column = 21 }
@@ -82,10 +90,7 @@ type alias R = {a|someFoo:Float}"""
 type alias R = {a|someId:Float}"""
                         |> Review.Test.expectErrors
                             [ Review.Test.error
-                                { message = "Do not accept Float values for IDs from any API."
-                                , details = [ "Use Int or String instead." ]
-                                , under = "someId:Float"
-                                }
+                                (standardErrorUnder "someId:Float")
                             ]
             , test "should warn about id Floats" <|
                 \() ->
@@ -93,10 +98,7 @@ type alias R = {a|someId:Float}"""
 type alias R = {a|id:Float}"""
                         |> Review.Test.expectErrors
                             [ Review.Test.error
-                                { message = "Do not accept Float values for IDs from any API."
-                                , details = [ "Use Int or String instead." ]
-                                , under = "id:Float"
-                                }
+                                (standardErrorUnder "id:Float")
                             ]
             , test "should highlight just the offending property" <|
                 \() ->
@@ -108,10 +110,7 @@ type alias Foo a =
     }"""
                         |> Review.Test.expectErrors
                             [ Review.Test.error
-                                { message = "Do not accept Float values for IDs from any API."
-                                , details = [ "Use Int or String instead." ]
-                                , under = "fooId : Float"
-                                }
+                                (standardErrorUnder "fooId : Float")
                                 |> Review.Test.atExactly
                                     { start = { row = 4, column = 11 }
                                     , end = { row = 4, column = 24 }
