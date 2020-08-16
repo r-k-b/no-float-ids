@@ -1,22 +1,17 @@
 {
     "type": "package",
     "name": "r-k-b/no-float-ids",
-    "version": "1.0.0",
     "summary": "A rule for elm-review that discourages Float types for \"Id\"s.",
     "license": "BSD-3-Clause",
+    "version": "1.0.0",
     "exposed-modules": [
         "NoFloatIds"
     ],
-    "source-directories": [
-        "src"
-    ],
-    "elm-version": "0.19.1 <= v < 0.20.0",
+    "elm-version": "0.19.0 <= v < 0.20.0",
     "dependencies": {
-        "elm/browser": "1.0.2 <= v < 2.0.0",
         "elm/core": "1.0.5 <= v < 2.0.0",
-        "elm/html": "1.0.0 <= v < 2.0.0",
-        "jfmengels/elm-review": "1.0.0 <= v < 3.0.0",
-        "stil4m/elm-syntax": "7.1.1 <= v < 8.0.0"
+        "jfmengels/elm-review": "2.2.0 <= v < 3.0.0",
+        "stil4m/elm-syntax": "7.1.3 <= v < 8.0.0"
     },
     "test-dependencies": {
         "elm-explorations/test": "1.2.2 <= v < 2.0.0"

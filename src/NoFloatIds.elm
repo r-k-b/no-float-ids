@@ -63,11 +63,9 @@ But not the third:
 -}
 rule : Rule
 rule =
-    -- Define the rule with the same name as the module it is defined in
-    Rule.newSchema "NoFloatIds"
-        -- Make it look at declarations
+    Rule.newModuleRuleSchema "NoFloatIds" ()
         |> Rule.withSimpleDeclarationVisitor declarationVisitor
-        |> Rule.fromSchema
+        |> Rule.fromModuleRuleSchema
 
 
 details =
@@ -85,7 +83,7 @@ details =
     }
 
 
-declarationVisitor : Node Declaration -> List Error
+declarationVisitor : Node Declaration -> List (Error {})
 declarationVisitor node =
     case Node.value node of
         FunctionDeclaration _ ->
@@ -130,7 +128,7 @@ declarationVisitor node =
             []
 
 
-checkForFloatIds : Node RecordField -> List Error
+checkForFloatIds : Node RecordField -> List (Error {})
 checkForFloatIds recordDefinition =
     let
         ( nameNode, typeAnno ) =

@@ -15,27 +15,31 @@ from being assigned `Float` types.
 For example, the following two Record type definitions would be marked as
 Errors:
 
-    type alias Foo =
-        { qux : Qux
-        , someId : Float
-        }
+```elm
+type alias Foo =
+    { qux : Qux
+    , someId : Float
+    }
 
-    type alias Bar =
-        { qux : Qux
-        , id : Float
-        }
-
+type alias Bar =
+    { qux : Qux
+    , id : Float
+    }
+```
 
 ## Usage
 
 After adding [`elm-review`][elm-review] to your project, import this rule from
 your `ReviewConfig.elm` file and add it to the config. E.g.:
 
-    import NoFloatIds
-    import Review.Rule exposing (Rule)
+```elm
+import NoFloatIds
+import Review.Rule exposing (Rule)
 
-    config : List Rule
-    config =
-        [ NoFloatIds.rule ]
+
+config : List Rule
+config =
+    [ NoFloatIds.rule ]
+```
 
 [elm-review]: https://package.elm-lang.org/packages/jfmengels/elm-review/latest/
