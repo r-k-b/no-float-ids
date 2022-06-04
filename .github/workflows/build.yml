@@ -1,10 +1,10 @@
 on: push
 jobs:
   make:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node: [ '13', '12', '10', '8' ]
+        node: [ '18', '16', '14' ]
     name: Node ${{ matrix.node }} sample
     steps:
       - uses: actions/checkout@v2
