@@ -7,15 +7,15 @@ jobs:
         node: [ '18', '16', '14' ]
     name: Node ${{ matrix.node }} sample
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/cache@v5
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         name: cache elm
         with:
           path: ~/.elm
           key: ${{ runner.os }}-elm-${{ hashFiles('**/elm.json') }}
           restore-keys: |
             ${{ runner.os }}-elm-
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         name: cache npm
         with:
           path: ~/.npm
@@ -23,7 +23,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: ${{ matrix.node }}
       - run: npm install
