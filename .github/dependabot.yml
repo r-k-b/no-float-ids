@@ -1,6 +1,8 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
+    cooldown:
+      default-days: 10
     directory: "/"
     schedule:
       interval: "daily"
@@ -9,6 +11,8 @@ updates:
     reviewers:
       - "r-k-b"
   - package-ecosystem: "elm"
+    cooldown:
+      default-days: 10
     directory: "/"
     schedule:
       interval: "daily"
@@ -17,6 +21,8 @@ updates:
     reviewers:
       - "r-k-b"
   - package-ecosystem: "github-actions"
+    cooldown:
+      default-days: 10
     directory: "/"
     schedule:
       interval: "daily"
